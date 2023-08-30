@@ -2,17 +2,28 @@ pipeline {
     agent any
     
     stages {
-        stage('Test') {
+        stage('Checkout') {
             steps {
-                python --version
-                 bat "\"C:\\Users\\Coditas\\AppData\\Local\\Programs\\Python\\Python310\\python.exe\" --version"
+                checkout scm
             }
         }
         
-        stage('Build') {
+        stage('Install Flask') {
             steps {
-                bat "\"C:\\Users\\Coditas\\AppData\\Local\\Programs\\Python\\Python310\\python.exe\" main.py"
+                bat 'pip install Flask'
             }
+        }
+        
+        stage('Run Flask App') {
+            steps {
+                bat 'python main.py'
+            }
+        }
+    }
+    
+    post {
+        always {
+            slackSend color: 'good', message: "Flask App Build Successful"
         }
     }
 }
