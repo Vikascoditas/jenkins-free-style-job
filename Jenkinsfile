@@ -10,7 +10,7 @@ pipeline {
         
         stage('Install Flask') {
             steps {
-                bat 'pip install Flask'
+                bat 'python -m pip install Flask'
             }
         }
         
@@ -18,12 +18,6 @@ pipeline {
             steps {
                 bat 'python main.py'
             }
-        }
-    }
-    
-    post {
-        always {
-            slackSend color: 'good', message: "Flask App Build Successful"
         }
     }
 }
