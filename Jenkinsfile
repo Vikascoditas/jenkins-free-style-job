@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                python --version
                  bat "\"C:\\Users\\Coditas\\AppData\\Local\\Programs\\Python\\Python310\\python.exe\" --version"
             }
         }
